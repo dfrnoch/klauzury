@@ -1,8 +1,3 @@
-/**
- * Define User model
- *
- * @author Faiz A. Farooqui <faiz@geekyants.com>
- */
 
  import * as bcrypt from 'bcrypt';
  

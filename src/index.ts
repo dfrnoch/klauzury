@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 dotevn.config();
 const app: Application = express();
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
 
