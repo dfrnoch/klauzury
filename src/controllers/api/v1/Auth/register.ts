@@ -10,14 +10,15 @@ interface UserForm {
 
 class RegisterController {
     public static register(req: Request, res: Response) {
+        console.log(req.body);
         const { email, password }: UserForm = req.body;
+
 
         User.findOne({ email: email }, (err: any , user: Object) => {
             if (err) {
                 return res.status(500).json({
                     success: false,
-                    message: 'Error checking user',
-                    error: err
+                    message: 'Error checking user'
                 });
             }
 

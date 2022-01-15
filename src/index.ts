@@ -1,11 +1,14 @@
 import express, {Application} from "express";
 import dotevn from "dotenv";
 import router from "./routes/api";
-
+import bodyParser from "body-parser";
 
 dotevn.config();
 const app: Application = express();
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(bodyParser.json())
 
 app.use("/api", router)
 
