@@ -1,0 +1,18 @@
+{
+  "name": "klauzury",
+  "version": "1.0.0",
+  "description": "Klauzurní práce 2. ročníku",
+  "main": "src/index.ts",
+  "author": "lynx",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node-dev --respawn -- src/index.ts",
+    "build": "tsc",
+    "lint": "eslint --ext .ts,.js src test"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.4"
+  }
+}
