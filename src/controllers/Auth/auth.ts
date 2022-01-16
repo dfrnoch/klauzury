@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import joi from 'joi';
+import bcrypt from 'bcrypt';
 
 
 import { Request, Response, NextFunction } from 'express';
@@ -33,13 +34,8 @@ class AuthController {
                 return next(error);
             }
 
-            user.comparePassword(password, (err: any, isMatch: boolean) => {
-                if (err) {
-                    const error = new HttpException(500, 'Internal server error');
-                    return next(error);
-                }
-
-                if (!isMatch) {
+            bcrypt.compare(password, user.password).then((result: boolean) => {
+                if (!result) {
                     const error = new HttpException(401, 'Unauthorized');
                     return next(error);
                 }
