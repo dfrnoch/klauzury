@@ -2,8 +2,9 @@ import jwt from 'jsonwebtoken';
 import joi from 'joi';
 
 
-import { Request, Response } from 'express';
-import User from "../../../../models/User";
+import { Request, Response, NextFunction } from 'express';
+import User from "../../models/User";
+import { HttpException } from '../../exceptions/HttpException';
 
 interface UserForm {
     email: string;
@@ -11,7 +12,7 @@ interface UserForm {
 }
 
 class RegisterController {
-    public static register(req: Request, res: Response) {
+    public static register(req: Request, res: Response, next: NextFunction) {
         console.log(req.body);
         const { email, password }: UserForm = req.body;
 
@@ -25,11 +26,9 @@ class RegisterController {
             }
 
             if (user) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'User already exists'
-                });
-
+                const error = new HttpException(409, 'User already exists');
+                return next(error);
+                
             } else {
                 const schema = joi.object({
                     email: joi.string().email().required(),

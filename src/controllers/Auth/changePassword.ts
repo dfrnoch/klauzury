@@ -1,0 +1,1 @@
+// const { id, name } = req.jwtPayload;
