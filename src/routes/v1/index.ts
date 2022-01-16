@@ -5,7 +5,7 @@ import auth from './auth';
 
 const router = Router();
 
-router.post('/auth', auth);
+router.use('/auth', auth);
 
 
 export default router; 

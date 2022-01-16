@@ -1,6 +1,6 @@
 import express, {Application} from "express";
 import dotenv from "dotenv";
-import router from "./routes/api";
+import router from "./routes";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
 
-app.use("/api", router)
+app.use("/", router)
 
 
 app.listen(process.env.port, () => {
