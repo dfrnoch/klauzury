@@ -1,22 +1,14 @@
 import express, {Application} from "express";
-import dotenv from "dotenv";
+
 import router from "./routes";
-import bodyParser from "body-parser";
-import mongoose from "mongoose";
 
-
-
-dotenv.config();
-
-
-mongoose.connect(process.env.MONGO_URI as string);
+import Loader from "./loaders";
 
 
 const app: Application = express();
+Loader.load(app);
 
-app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(bodyParser.json())
 
 app.use("/", router)
 
