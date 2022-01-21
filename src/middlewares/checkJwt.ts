@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import {Request, Response, NextFunction} from 'express';
 
-import { HttpException } from '../exceptions/HttpException';
+import HttpException from '../exceptions/HttpException';
 
 
 class chekJwt {

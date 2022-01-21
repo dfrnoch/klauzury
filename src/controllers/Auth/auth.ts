@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 import { Request, Response, NextFunction } from 'express';
 import User from "../../models/User";
-import { HttpException } from '../../exceptions/HttpException';
+import HttpException from '../../exceptions/HttpException';
 
 interface UserForm {
     email: string;
