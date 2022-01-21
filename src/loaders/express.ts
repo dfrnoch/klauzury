@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import router from "../routes";
+import errorHandler from '../middlewares/errorHandler';
 
 
 export default class ExpressLoader {
@@ -13,6 +14,8 @@ export default class ExpressLoader {
         app.use(bodyParser.json())
 
         app.use(router);
+
+        app.use(errorHandler.error)
 
         console.log('Express loaded');
     }
