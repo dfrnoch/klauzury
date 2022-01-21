@@ -30,13 +30,13 @@ class AuthController {
             }
 
             if (!user) {
-                const error = new HttpException(401, 'Unauthorized');
+                const error = new HttpException(401, 'User not found');
                 return next(error);
             }
             if (password) {
                 bcrypt.compare(password, user.password).then((result: boolean) => {
                     if (!result) {
-                        const error = new HttpException(401, 'Unauthorized');
+                        const error = new HttpException(401, 'Invalid name or password');
                         return next(error);
                     }
 
@@ -50,7 +50,7 @@ class AuthController {
 
                 });
             } else {
-                const error = new HttpException(401, 'Unauthorized');
+                const error = new HttpException(401, 'Invalid name or password');
                 return next(error);
             }
         });
