@@ -1,7 +1,7 @@
 
  import * as bcrypt from 'bcrypt';
  
- import { IUser } from '../interfaces/user';
+ import { IUser } from './user.interface';
  import mongoose from 'mongoose';
  
  export interface IUserModel extends IUser, mongoose.Document {
@@ -10,11 +10,7 @@
 
  export const UserSchema = new mongoose.Schema({
      email: { type: String, unique: true },
-     password: { type: String },
-     properties: { type: Object, default: {
-            name: '',
-            picture: ''
-     } }
+     password: { type: String }
  });
 
 
@@ -40,6 +36,7 @@
      });
  });
  
+ UserSchema.methods.comparePasswords = (decodedPassword: string, hashedPassword: string) => bcrypt.compare(decodedPassword, hashedPassword);
 
 
  
