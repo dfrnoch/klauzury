@@ -3,12 +3,10 @@ import { Router } from 'express';
 import { authValidator } from '../../validators/auth.validator';
 import { checkValidator } from '../../middlewares/checkValidator.middleware';
 
-import { AuthService } from '../../controllers/Auth/auth.service';
 import { AuthController } from '../../controllers/Auth/auth.controller';
 
 const router = Router();
-const auth = new AuthController(new AuthService());
-
+const auth = new AuthController();
 
 router.post('/register',
     authValidator.register, checkValidator,
@@ -16,7 +14,7 @@ router.post('/register',
 );
 
 router.post('/login',
-    authValidator.login, checkValidator,
+    authValidator.login,
     auth.login
 );
 
