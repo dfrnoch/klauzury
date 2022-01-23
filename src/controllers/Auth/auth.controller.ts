@@ -2,37 +2,33 @@ import jwt from 'jsonwebtoken';
 
 
 import { Request, Response, NextFunction } from 'express';
-import User from "../../models/user/User.model";
 import HttpException from '../../exceptions/HttpException';
-import { AuthService } from './auth.service';
 import {IUser} from '../../models/user/user.interface';
-
-interface UserForm {
-    email: string;
-    password: string;
-}
+import { AuthService } from './auth.service';
 
 
 
 
-
-class AuthController {
-
-    constructor(public authService: AuthService) {
-        this.authService = authService;
+export class AuthController {
+        
+    constructor(private authService: AuthService) {
+        this.authService = authService.model;
     }
+
+    
 
     async login(req: Request, res: Response, next: NextFunction) {
 
         const { username, email, password } = req.body;
 
-        if (!username && !email) return next(new HttpException(201, 'fields \'username\' or \'email\' must be specified'));
+        if (!username && !email) return next(new HttpException(201, 'username or email must be specified'));
 
         const conditions: Partial<{ username?: string; email?: string; }> = {};
-
+ 
         if (email) conditions.email = email;
         else conditions.username = username;
 
+        console.log(conditions);
         const user = await this.authService.get(conditions);
 
         if (!user || !(await user.comparePasswords(password, user.password)))
@@ -42,12 +38,10 @@ class AuthController {
     }
 
     
-    async register(req: Request, res: Response, next: NextFunction) {
+    async register(req: Request, res: Response) {
         const user = await this.authService.create(req.body);
 
-
         this.createJwt(user, res);
-
     }
 
     private createJwt(user: IUser, res: Response) {
@@ -60,5 +54,3 @@ class AuthController {
     }
     
 }
-
-export default AuthController;

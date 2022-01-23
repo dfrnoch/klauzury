@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 import router from "../routes";
-import errorHandler from '../middlewares/errorHandler';
+import errorHandler from '../middlewares/errorHandler.middleware';
 
 
 export default class ExpressLoader {

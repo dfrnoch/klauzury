@@ -1,5 +1,5 @@
 import { Request, Router, Response } from 'express';
-import checkJwt from "../../middlewares/checkJwt"
+import { checkJwt } from "../../middlewares/checkJwt.middleware"
 
 
 const router = Router();

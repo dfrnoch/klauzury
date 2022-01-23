@@ -1,9 +1,14 @@
-import User from '../../models/user/user.model';
+import { User } from '../../models/user/user.model';
+import { UserProfile } from '../../models/user/profile/profile.model';
 
-export class AuthService {
-    public model = User;
+export class AuthService  {
+    model = User;
 
+
+    
     public get(conditions: { [key: string]: any }) {
+        console.log(conditions);
+
         return this.model.findOne(conditions);
     };
 

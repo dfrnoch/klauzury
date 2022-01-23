@@ -4,8 +4,8 @@ import {Request, Response, NextFunction} from 'express';
 import HttpException from '../exceptions/HttpException';
 
 
-class chekJwt {
-    public static check(req: Request, res: Response, next: NextFunction) {
+export class checkJwt {
+    public static check(req: Request, _res: Response, next: NextFunction) {
         const token = req.headers['authorization'];
         if (!token) {
             const error = new HttpException(401, 'Unauthorized');
@@ -18,10 +18,8 @@ class chekJwt {
                 return next(error);
             
             }
-            res.locals.user = decoded;
+            req.body.user = decoded;
             next();
         });
     }
-}
-
-export default chekJwt;
+} 

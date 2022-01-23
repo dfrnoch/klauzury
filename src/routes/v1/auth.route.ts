@@ -1,14 +1,25 @@
 import { Router } from 'express';
-// import checkJwt from "../../middlewares/checkJwt"
 
-import AuthController from '../../controllers/Auth/auth';
+import { authValidator } from '../../validators/auth.validator';
+import { checkValidator } from '../../middlewares/checkValidator.middleware';
+
+import { AuthService } from '../../controllers/Auth/auth.service';
+import { AuthController } from '../../controllers/Auth/auth.controller';
 
 const router = Router();
+const auth = new AuthController(new AuthService());
 
 
-router.post('/register', AuthController.register);
-router.post('/login', AuthController.login);
+router.post('/register',
+    authValidator.register, checkValidator,
+    auth.register
+);
+
+router.post('/login',
+    authValidator.login, checkValidator,
+    auth.login
+);
 
 
-//[checkJwt.check]
+
 export default router; 

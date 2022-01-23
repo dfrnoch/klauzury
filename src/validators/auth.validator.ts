@@ -1,23 +1,7 @@
 import { checkSchema } from 'express-validator';
 import { isNotEmpty } from './lib/is-not-empty';
 
-const signUp = checkSchema({
-    firstName: {
-        optional: true,
-        isString: true,
-        isLength: {
-            errorMessage: 'field \'firstName\' must be between 2 and 64 characters',
-            options: { min: 2, max: 64 }
-        }
-    },
-    lastName: {
-        optional: true,
-        isString: true,
-        isLength: {
-            errorMessage: 'field \'lastName\' must be between 2 and 64 characters',
-            options: { min: 2, max: 64 }
-        }
-    },
+const register = checkSchema({
     username: {
         notEmpty: isNotEmpty('username'),
         isString: true,
@@ -45,7 +29,7 @@ const signUp = checkSchema({
     }
 });
 
-const signIn = checkSchema({
+const login = checkSchema({
     username: {
         optional: true,
         isString: true,
@@ -134,8 +118,8 @@ const updateEmail = checkSchema({
 });
 
 export const authValidator = {
-    signIn,
-    signUp,
+    login,
+    register,
     update,
     updateEmail,
     updatePassword

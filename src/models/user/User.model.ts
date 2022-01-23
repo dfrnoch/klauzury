@@ -2,21 +2,46 @@
  import * as bcrypt from 'bcrypt';
  
  import { IUser } from './user.interface';
- import mongoose from 'mongoose';
+ import { Models } from '../models.enum';
+ import mongoose, { Schema } from 'mongoose';
+ import { setUserVirtuals } from './user.virtuals';
  
- export interface IUserModel extends IUser, mongoose.Document {
-    isModified(arg0: string): boolean;
- }
 
- export const UserSchema = new mongoose.Schema({
-     email: { type: String, unique: true },
-     password: { type: String }
- });
+ let userSchema = new Schema<IUser>({
+    username: {
+        type: String,
+        minlength: [2, 'field \'username\' must contains at least 2 characters'],
+        maxlength: [32, 'field \'username\' must contain no more than 32 characters'],
+        trim: true,
+        unique: true,
+        required: [true, 'field \'username\' is required'],
+    },
+    email: {
+        type: String,
+        select: false,
+        trim: true,
+        unique: true,
+        required: [true, 'field \'email\' is required'],
+    },
+    password: {
+        type: String,
+        required: [true, 'field \'password\' is required'],
+        select: false
+    },
+    // role: {
+    //     type: SchemaTypes.String,
+    //     enum: ['user', 'admin'],
+    //     default: 'user'
+    // },
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: true
+});
 
 
- UserSchema.pre<IUserModel>('save', function (_next: any) {
-     const user = this;
-     if (!user.isModified('password')) {
+userSchema.pre<IUser>('save', function (_next: any) {
+     if (!this.isModified('password')) {
          return _next();
      }
  
@@ -25,22 +50,21 @@
              return _next(_err);
          }
  
-         bcrypt.hash(user.password, _salt, (_err: any, _hash: string) => {
+         bcrypt.hash(this.password, _salt, (_err: any, _hash: string) => {
              if (_err) {
                  return _next(_err);
              }
  
-             user.password = _hash;
+             this.password = _hash;
              return _next();
          });
      });
  });
  
- UserSchema.methods.comparePasswords = (decodedPassword: string, hashedPassword: string) => bcrypt.compare(decodedPassword, hashedPassword);
+ userSchema.methods.comparePasswords = (decodedPassword: string, hashedPassword: string) => bcrypt.compare(decodedPassword, hashedPassword);
 
 
  
- const User = mongoose.model<IUser>('User', UserSchema);
- 
+ setUserVirtuals(userSchema);
 
- export default User;
+ export const User = mongoose.model<IUser>(Models.USER, userSchema);;

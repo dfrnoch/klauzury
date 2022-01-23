@@ -4,4 +4,8 @@ enum UserRoles {
 }
 
 
-export { UserRoles };
+enum UserVirtuals {
+    PROFILE = 'profile'
+}
+
+export { UserRoles, UserVirtuals };

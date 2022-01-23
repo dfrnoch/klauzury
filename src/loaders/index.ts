@@ -1,6 +1,6 @@
 
-import ExpressLoader from "./express";
-import MongooseLoader from "./mongoose";
+import ExpressLoader from "./express.loader";
+import MongooseLoader from "./mongoose.loader";
 
 import { Application } from "express";
 
