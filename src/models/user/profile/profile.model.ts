@@ -11,11 +11,10 @@ const userProfileSchema = new Schema({
     },
     bio: {
         type: SchemaTypes.String,
-        maxlength: [255, 'field \'biography\' must contain no more than 255 characters']
+        default: 'Hello, I am a new user.'
     },
     gender: {
         type: SchemaTypes.String,
-        enum: ['M' /*MALE*/, 'F' /*FEMALE*/, 'UNKNOWN'],
         default: 'UNKNOWN',
     }
 }, {

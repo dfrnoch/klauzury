@@ -28,7 +28,4 @@ export class AuthService {
         return this.model.findByIdAndUpdate(id, body, { new: true });
     };
 
-    public test() {
-        console.log('test');
-    };
 }

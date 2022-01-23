@@ -10,22 +10,17 @@
  let userSchema = new Schema<IUser>({
     username: {
         type: String,
-        minlength: [2, 'field \'username\' must contains at least 2 characters'],
-        maxlength: [32, 'field \'username\' must contain no more than 32 characters'],
         trim: true,
         unique: true,
-        required: [true, 'field \'username\' is required'],
     },
     email: {
         type: String,
         select: false,
         trim: true,
         unique: true,
-        required: [true, 'field \'email\' is required'],
     },
     password: {
         type: String,
-        required: [true, 'field \'password\' is required'],
         select: false
     },
     // role: {
@@ -40,7 +35,9 @@
 });
 
 
-userSchema.pre<IUser>('save', function (_next: any) {
+
+
+userSchema.pre<IUser>('save', function (_next) {
      if (!this.isModified('password')) {
          return _next();
      }
@@ -67,4 +64,4 @@ userSchema.pre<IUser>('save', function (_next: any) {
  
  setUserVirtuals(userSchema);
 
- export const User = mongoose.model<IUser>(Models.USER, userSchema);;
+ export const User = mongoose.model<IUser>(Models.USER, userSchema);

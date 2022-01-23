@@ -8,7 +8,6 @@ const app: Application = express();
 Loader.load(app);
 
 
-
 app.listen(config.port, () => {
     console.log('Server is running on port ' + config.port);
 });
