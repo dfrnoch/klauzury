@@ -23,7 +23,7 @@ export class AuthController {
 
         const { username, email, password } = req.body;
 
-        if (!username && !email) return next(new HttpException(400, 'username or email must be specified'));
+        if (!username && !email) return next(new HttpException(400, 'Username or email must be specified'));
 
         const conditions: Partial<{ username?: string; email?: string; }> = {};
  
@@ -42,7 +42,7 @@ export class AuthController {
     async register(req: Request, res: Response, next: NextFunction) {
         const { username, email } = req.body;
 
-        if (!username && !email) return next(new HttpException(400, 'username or email must be specified'));
+        if (!username && !email) return next(new HttpException(400, 'Username or email must be specified'));
 
         const checkEmail = await this.authService.get({"email": email});
         const checkUsername = await this.authService.get({"username": username});
@@ -56,11 +56,21 @@ export class AuthController {
 
 
     private createJwt(user: IUser, res: Response) {
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET as string);
+        const token = jwt.sign({
+            id: user._id,
+        }, process.env.JWT_SECRET as string, { expiresIn: '90d' });
 
-        return res.status(200).json({
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 90,
+            secure: false,
+            sameSite: true,
+        });
+
+        return res.status(200).json({ 
             success: true,
-            token: token
+            token 
         });
     }
     

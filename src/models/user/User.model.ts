@@ -22,12 +22,7 @@
     password: {
         type: String,
         select: false
-    },
-    // role: {
-    //     type: SchemaTypes.String,
-    //     enum: ['user', 'admin'],
-    //     default: 'user'
-    // },
+    }
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },

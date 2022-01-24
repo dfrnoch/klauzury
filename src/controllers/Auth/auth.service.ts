@@ -19,7 +19,7 @@ export class AuthService {
             password: user.password
         });
 
-        createdUser.profile = await UserProfile.create({ user: createdUser._id || createdUser.id });
+        createdUser.profile = await UserProfile.create({ user: createdUser._id });
 
         return createdUser;
     };
