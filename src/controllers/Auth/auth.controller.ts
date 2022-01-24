@@ -18,9 +18,7 @@ export class AuthController {
     }
     
 
-
     async login(req: Request, res: Response, next: NextFunction) {
-
         const { username, email, password } = req.body;
 
         if (!username && !email) return next(new HttpException(400, 'Username or email must be specified'));
