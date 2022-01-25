@@ -3,7 +3,13 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
-import router from "../routes";
+import AuthRoute from "../routes/v1/auth.route";
+import TestRoute from "../routes/v1/test.route";
+import UserRoute from "../routes/v1/User/user.route";
+import MeRoute from "../routes/v1/User/me.route";
+
+
+
 import errorHandler from '../middlewares/errorHandler.middleware';
 
 
@@ -15,7 +21,10 @@ export default class ExpressLoader {
         app.use(bodyParser.urlencoded({ extended: true }))
         app.use(bodyParser.json())
 
-        app.use(router);
+        app.use('/api/v1/auth', AuthRoute);
+        app.use('/api/v1/test', TestRoute);
+        app.use('/api/v1/user' UserRoute);
+        app.use('/api/v1/user/me' MeRoute)
 
         app.use(errorHandler.error)
 
