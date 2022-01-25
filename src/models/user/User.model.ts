@@ -25,7 +25,6 @@ let userSchema = new Schema<IUser>({
     },
     iat: {
         type: Date,
-        select: false
     },
 }, {
     toJSON: { virtuals: true },
@@ -33,7 +32,7 @@ let userSchema = new Schema<IUser>({
     timestamps: true
 });
 
-
+// pre save
 userSchema.pre<IUser>("save", function (next) 
 { 
      if(this.isModified('password')) {
@@ -44,17 +43,17 @@ userSchema.pre<IUser>("save", function (next)
 });
 
 
+
+// methods
 userSchema.methods.checkIat = function(JWTiat: number) {
     if (this.iat) {
         const changedTimestamp = parseInt((this.iat.getTime() / 1000).toString(), 10);
-        return +JWTiat < changedTimestamp;
+        return JWTiat < changedTimestamp;
     }
 
     return false;
 };
-
 userSchema.methods.comparePasswords = (decodedPassword: string, hashedPassword: string) => bcrypt.compare(decodedPassword, hashedPassword);
-
 userSchema.methods.hashPassword = (password: string): Promise<string> => bcrypt.hash(password, 10);
 
 

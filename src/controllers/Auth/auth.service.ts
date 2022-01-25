@@ -23,7 +23,7 @@ export class AuthService {
     };
 
     public update(id: string, body: { [key: string]: any }) {
-        return this.model.findByIdAndUpdate(id, body, { new: true }).select('+password');;
+        return this.model.findByIdAndUpdate(id, body, { new: true }).select('+password');
     };
 
 }

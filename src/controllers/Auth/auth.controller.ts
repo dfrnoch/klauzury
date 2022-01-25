@@ -56,16 +56,16 @@ export class AuthController {
     async updatePassword(req: Request, res: Response, next: NextFunction) {
         const { password, newpassword } = req.body;
 
-        console.log(req.body);
         const user = req.body.user as IUser;
 
-        if (password === newpassword || !user || !(await user.comparePasswords(password, user.password)))
+        if (!user || !(await user.comparePasswords(password, user.password)))
             return next(new HttpException(400, 'Incorrect Details'));
+        if (password === newpassword)
+            return next(new HttpException(400, 'New password must be different from old password'));
 
+        const hashedPassword = await user.hashPassword(newpassword);
 
-
-
-        await this.authService.update(user._id, { password: newpassword });
+        await this.authService.update(user._id, { password: hashedPassword, iat: new Date() });
 
         return this.createJwt(user, res);
     }
@@ -76,12 +76,12 @@ export class AuthController {
     private createJwt(user: IUser, res: Response) {
         const token = jwt.sign({
             id: user._id,
-        }, process.env.JWT_SECRET as string, { expiresIn: '90d' });
+        }, process.env.JWT_SECRET as string, { expiresIn: '365d' });
 
 
         res.cookie('token', token, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 90,
+            maxAge: 1000 * 60 * 60 * 24 * 365,
             secure: false,
             sameSite: true,
         });
