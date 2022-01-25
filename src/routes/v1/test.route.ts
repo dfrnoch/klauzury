@@ -11,7 +11,7 @@ router.post('/jwt', [checkJwt.check], async (req: Request, res: Response) => {
     const body = req.body;
     const user = await User.findOne({ _id: body.user.id }).populate(UserVirtuals.PROFILE);
 
-    console.log(user?.toJSON());
+    console.log(user);
 
     res.json({
         message: body

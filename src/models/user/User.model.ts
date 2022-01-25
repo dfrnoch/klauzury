@@ -22,7 +22,11 @@ let userSchema = new Schema<IUser>({
     password: {
         type: String,
         select: false
-    }
+    },
+    iat: {
+        type: Date,
+        select: false
+    },
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
@@ -30,15 +34,28 @@ let userSchema = new Schema<IUser>({
 });
 
 
-
-
-userSchema.pre<IUser>('save', function (_next) {
-    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
-    _next();
+userSchema.pre<IUser>("save", function (next) 
+{ 
+     if(this.isModified('password')) {
+        this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+        next();
+     }
+     next();
 });
+
+
+userSchema.methods.checkIat = function(JWTiat: number) {
+    if (this.iat) {
+        const changedTimestamp = parseInt((this.iat.getTime() / 1000).toString(), 10);
+        return +JWTiat < changedTimestamp;
+    }
+
+    return false;
+};
 
 userSchema.methods.comparePasswords = (decodedPassword: string, hashedPassword: string) => bcrypt.compare(decodedPassword, hashedPassword);
 
+userSchema.methods.hashPassword = (password: string): Promise<string> => bcrypt.hash(password, 10);
 
 
 setUserVirtuals(userSchema);

@@ -6,8 +6,6 @@ export class AuthService {
 
 
     public get(conditions: { [key: string]: any }) {
-        console.log(conditions);
-
         return this.model.findOne(conditions).select('+password +email');
     };
 
@@ -25,7 +23,7 @@ export class AuthService {
     };
 
     public update(id: string, body: { [key: string]: any }) {
-        return this.model.findByIdAndUpdate(id, body, { new: true });
+        return this.model.findByIdAndUpdate(id, body, { new: true }).select('+password');;
     };
 
 }

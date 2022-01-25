@@ -8,11 +8,14 @@ export interface IUser extends IBaseModel {
     username: string;
 	email: string;
 	password: string;
-    // role: UserRoles;
+    iat: Date;
 
     profile?: IUserProfile | Types.ObjectId | string;
+    
+
 
 
     comparePasswords(decodedPassword: string, hashedPassword: string): Promise<boolean>
-
+    checkIat(JWTiat: number): boolean
+    hashPassword(password: string): Promise<string>
 }

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { Request, Response, NextFunction } from 'express';
 import HttpException from '../../exceptions/HttpException';
-import {IUser} from '../../models/user/user.interface';
+import { IUser } from '../../models/user/user.interface';
 import { AuthService } from './auth.service';
 
 
@@ -15,8 +15,9 @@ export class AuthController {
     constructor() {
         this.login = this.login.bind(this);
         this.register = this.register.bind(this);
+        this.updatePassword = this.updatePassword.bind(this);
     }
-    
+
 
     async login(req: Request, res: Response, next: NextFunction) {
         const { username, email, password } = req.body;
@@ -24,7 +25,7 @@ export class AuthController {
         if (!username && !email) return next(new HttpException(400, 'Username or email must be specified'));
 
         const conditions: Partial<{ username?: string; email?: string; }> = {};
- 
+
         if (email) conditions.email = email;
         else conditions.username = username;
 
@@ -32,24 +33,43 @@ export class AuthController {
 
         if (!user || !(await user.comparePasswords(password, user.password)))
             return next(new HttpException(400, 'Incorrect credentials'));
- 
-        this.createJwt(user, res);
+
+        return this.createJwt(user, res);
     }
 
-    
+
     async register(req: Request, res: Response, next: NextFunction) {
         const { username, email } = req.body;
 
         if (!username && !email) return next(new HttpException(400, 'Username or email must be specified'));
 
-        const checkEmail = await this.authService.get({"email": email});
-        const checkUsername = await this.authService.get({"username": username});
+        const checkEmail = await this.authService.get({ "email": email });
+        const checkUsername = await this.authService.get({ "username": username });
         if (checkEmail || checkUsername) return next(new HttpException(400, 'User with this email or username already exists'));
 
 
         const user = await this.authService.create(req.body);
-        this.createJwt(user, res);
+        return this.createJwt(user, res);
     }
+
+
+    async updatePassword(req: Request, res: Response, next: NextFunction) {
+        const { password, newpassword } = req.body;
+
+        console.log(req.body);
+        const user = req.body.user as IUser;
+
+        if (password === newpassword || !user || !(await user.comparePasswords(password, user.password)))
+            return next(new HttpException(400, 'Incorrect Details'));
+
+
+
+
+        await this.authService.update(user._id, { password: newpassword });
+
+        return this.createJwt(user, res);
+    }
+
 
 
 
@@ -66,10 +86,10 @@ export class AuthController {
             sameSite: true,
         });
 
-        return res.status(200).json({ 
+        return res.status(200).json({
             success: true,
-            token 
+            token
         });
     }
-    
+
 }
