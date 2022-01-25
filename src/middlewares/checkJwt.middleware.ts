@@ -32,9 +32,6 @@ export class checkJwt {
                 const error = new HttpException(401, 'Token expired');
                 return next(error);
             }
-            console.log(user.checkIat(result.iat))
-
-            console.log("res" + result.iat)
             req.body.user = user;
 
             next();

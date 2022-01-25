@@ -34,6 +34,7 @@ export class AuthController {
         if (!user || !(await user.comparePasswords(password, user.password)))
             return next(new HttpException(400, 'Incorrect credentials'));
 
+
         return this.createJwt(user, res);
     }
 
