@@ -33,24 +33,8 @@
 
 
 userSchema.pre<IUser>('save', function (_next) {
-     if (!this.isModified('password')) {
-         return _next();
-     }
- 
-     bcrypt.genSalt(10, (_err: any, _salt: string) => {
-         if (_err) {
-             return _next(_err);
-         }
- 
-         bcrypt.hash(this.password, _salt, (_err: any, _hash: string) => {
-             if (_err) {
-                 return _next(_err);
-             }
- 
-             this.password = _hash;
-             return _next();
-         });
-     });
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+    _next();
  });
  
  userSchema.methods.comparePasswords = (decodedPassword: string, hashedPassword: string) => bcrypt.compare(decodedPassword, hashedPassword);
