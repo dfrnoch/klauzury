@@ -6,4 +6,6 @@ export enum Models {
     USER = 'User',
     
     USER_PROFILE = 'UserProfile',
+    USER_SETTINGS = 'UserSettings',
+    
 }
