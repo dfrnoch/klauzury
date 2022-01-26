@@ -12,18 +12,18 @@ const auth = new AuthController();
 router.post('/register',
     authValidator.register, checkValidator,
     auth.register
-);
+)
 
-router.post('/login',
-    authValidator.login, checkValidator,
-    auth.login
-);
-
-router.post('/updatepassword',
-    [checkJwt.check],
-    authValidator.updatePassword, checkValidator,
-    auth.updatePassword
-);
+    .post('/login',
+        authValidator.login, checkValidator,
+        auth.login
+    )
+    
+    .post('/updatepassword',
+        [checkJwt.check],
+        authValidator.updatePassword, checkValidator,
+        auth.updatePassword
+    );
 
 
 export default router; 

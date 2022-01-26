@@ -16,6 +16,7 @@ import HttpException from '../exceptions/HttpException';
  * @example
  * router.get('/users/:id', checkJwt.check, user.GetUserById);
  */
+
 export class checkJwt {
     public static async check(req: Request, _res: Response, next: NextFunction) {
         let token = req.headers['authorization'] as string;

@@ -32,7 +32,9 @@ let userSchema = new Schema<IUser>({
     timestamps: true
 });
 
-// pre save
+
+
+
 userSchema.pre<IUser>("save", function (next) 
 { 
      if(this.isModified('password')) {

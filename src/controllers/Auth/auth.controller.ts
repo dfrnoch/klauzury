@@ -10,9 +10,10 @@ import { AuthService } from './auth.service';
 
 
 export class AuthController {
-    authService = new AuthService();
+    private authService: AuthService;
 
     constructor() {
+        this.authService = new AuthService();
         this.login = this.login.bind(this);
         this.register = this.register.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
