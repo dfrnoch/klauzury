@@ -2,7 +2,10 @@
     "name": "klauzury",
     "version": "1.0.0",
     "description": "",
+    "license": "MIT",
     "scripts": {
+        "server": "cd ./server && yarn start",
+        "web": "cd ./web && yarn dev",
         "publishAll": "lerna version && git push"
     },
 
