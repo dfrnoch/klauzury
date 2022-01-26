@@ -1,6 +1,6 @@
 {
   "name": "klauzury-backend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Express server pro mojí aplikaci",
   "main": "src/index.ts",
   "author": "lynx",
