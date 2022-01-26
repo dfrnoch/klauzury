@@ -1,11 +1,11 @@
 node_modules/
+
 yarn.lock
 dist/
 .env
 
 
 
-/.cache
-/build
-/public/build
-.env
+web/.cache
+web/build
+web/public/build

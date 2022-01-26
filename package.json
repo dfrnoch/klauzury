@@ -2,7 +2,10 @@
     "name": "klauzury",
     "version": "1.0.0",
     "description": "",
-    
+    "scripts": {
+        "publishAll": "lerna publish --yes --skip-npm && git push"
+    },
+
     "devDependencies": {
         "lerna": "^4.0.0"
     }
