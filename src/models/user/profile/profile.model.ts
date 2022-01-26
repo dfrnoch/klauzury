@@ -11,10 +11,14 @@ const userProfileSchema = new Schema({
     },
     bio: {
         type: SchemaTypes.String,
-        default: 'Hello, I am a new user.'
+        default: 'Hi, I\'m a new user!'
+    },
+    color: {
+        type: SchemaTypes.String,
+        default: '#000000'
     },
     gender: {
-        type: SchemaTypes.String,
+        type: String,
         default: 'UNKNOWN',
     }
 }, {
