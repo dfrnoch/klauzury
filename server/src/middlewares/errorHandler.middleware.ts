@@ -3,12 +3,13 @@ import { NextFunction, Response, Request } from 'express';
 import HttpException from '../exceptions/HttpException';
 
 /**
- * Middleware used to handle errors
+ * A custom error handler that logs errors to the console.
  * 
- * @param err - Error
+ * @param {HttpException} err
+ * The error that occurred.
  * 
  */
- 
+
 class errorHandler {
     public static error(err: HttpException, _req: Request, res: Response, next: NextFunction) {
         if (err) {
