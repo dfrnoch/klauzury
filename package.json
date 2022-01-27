@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "server": "cd ./server && yarn start",
-        "web": "cd ./client && yarn dev",
+        "client": "cd ./client && yarn dev",
         "publishAll": "lerna version && git push"
     },
 
