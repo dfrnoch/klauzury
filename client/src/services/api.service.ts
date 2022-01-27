@@ -1,6 +1,4 @@
 import axios from "axios";
-// import { signOut } from "../contexts/auth.context";
-
 
 function setupAPIClient(ctx: any = undefined) {
     const token = localStorage.getItem("token");
