@@ -7,10 +7,10 @@ export class UserController{
 
     constructor(){
         this.userService = new UserService();
-        this.getOne = this.getOne.bind(this);
+        this.getUser = this.getUser.bind(this);
     }
 
-    public async getOne(req: Request, res: Response, next: NextFunction){
+    public async getUser(req: Request, res: Response, next: NextFunction){
         const { username } = req.params;
         const user = await this.userService.getOne({ username: username });
         if (!user) return next(new HttpException(404, 'User not found'));
