@@ -80,14 +80,6 @@ export class AuthController {
             id: user._id,
         }, process.env.JWT_SECRET as string, { expiresIn: '365d' });
 
-
-        res.cookie('token', token, {
-            httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 365,
-            secure: false,
-            sameSite: true,
-        });
-
         return res.status(200).json({
             success: true,
             token
