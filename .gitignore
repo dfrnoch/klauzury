@@ -6,7 +6,4 @@ dist/
 .env
 
 
-
-web/.cache
-web/build
-web/public/build
+client\src\.next
