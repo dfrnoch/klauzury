@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -140,18 +141,9 @@ const Login: NextPage = () => {
                     Remember me
                   </label>
                 </div>
-
-                <div className="text-sm mt-1">
-                  <a
-                    href="/reset-password"
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot your password?
-                  </a>
-                </div>
               </div>
 
-              <div>
+              <div className="mt-6">
                 <button
                   type="submit"
                   className={` group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus
@@ -202,6 +194,14 @@ const Login: NextPage = () => {
                   </span>
                   Sign up
                 </button>
+                <div className="mt-2 text-sm text-gray-600">
+                  Already have an account?{" "}
+                  <Link href="/login">
+                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
+                      Sign in
+                    </a>
+                  </Link>
+                </div>
               </div>
               {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
             </form>
