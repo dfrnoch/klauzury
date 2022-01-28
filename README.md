@@ -1,4 +1,4 @@
-# Klauzurní práce 2. ročníku
+# Projekt ke klauzurám
 
 ## Upozornění
 

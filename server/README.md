@@ -1,3 +1,3 @@
-# API Server pro klauzurní práce 2. ročníku 
+# API Server pro {insert name here}
 
 
