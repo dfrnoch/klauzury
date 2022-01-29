@@ -1,5 +1,5 @@
 import { model, Schema, SchemaTypes } from 'mongoose';
-import { Models } from '../../models.enum';
+import { Models } from '../../models.enums';
 import { IUserProfile } from './profile.interface';
 
 const userProfileSchema = new Schema({

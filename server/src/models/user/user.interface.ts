@@ -11,7 +11,7 @@ export interface IUser extends IBaseModel {
     iat: Date;
 
     profile?: IUserProfile | Types.ObjectId | string;
-    
+    posts?: Types.ObjectId[];
 
 
 

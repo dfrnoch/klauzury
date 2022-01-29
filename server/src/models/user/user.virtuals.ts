@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { Models } from "../models.enum";
+import { Models } from "../models.enums";
 import { UserVirtuals } from "./user.enums";
 import { IUser } from "./user.interface";
 
