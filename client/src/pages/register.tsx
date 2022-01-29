@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { FormItem } from "../components/Form/FormItem";
+import { FormItem } from "../modules/auth/FormItem";
 
 type Inputs = {
   username: string;
@@ -99,7 +99,7 @@ const Login: NextPage = () => {
                 />
                 <FormItem
                   register={register}
-                  value="password"
+                  value="Password"
                   name="password"
                   corner="b"
                 />
