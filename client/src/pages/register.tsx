@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { FormItem } from "../components/Form/FormItem";
 
 type Inputs = {
   username: string;
@@ -83,45 +84,26 @@ const Login: NextPage = () => {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md shadow-sm -space-y-px">
-                <div>
-                  <label htmlFor="username" className="sr-only">
-                    Username
-                  </label>
-                  <input
-                    {...register("username")}
-                    id="username"
-                    name="username"
-                    type="username"
-                    required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Username"
-                  />
-                </div>
-                <div>
-                  <input
-                    {...register("email")}
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Email"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password" className="sr-only">
-                    Password
-                  </label>
-                  <input
-                    {...register("password")}
-                    id="password"
-                    name="password"
-                    type="password"
-                    required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Password"
-                  />
-                </div>
+                <FormItem
+                  register={register}
+                  value="Username"
+                  name="username"
+                  type="text"
+                  corner="t"
+                />
+                <FormItem
+                  register={register}
+                  value="Email"
+                  name="email"
+                  corner="n"
+                />
+                <FormItem
+                  register={register}
+                  value="password"
+                  name="password"
+                  corner="b"
+                />
+
               </div>
 
               <div>
@@ -131,8 +113,8 @@ const Login: NextPage = () => {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    checked
                     className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                    checked
                   />
                   <label
                     htmlFor="remember-me"
@@ -147,11 +129,10 @@ const Login: NextPage = () => {
                 <button
                   type="submit"
                   className={` group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus
-                  ${
-                    loading
+                  ${loading
                       ? "cursor-not-allowed bg-indigo-400"
                       : "hover:bg-indigo-700"
-                  }`}
+                    }`}
                 >
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                     {loading ? (
