@@ -6,12 +6,11 @@ import { IUser } from "../user/user.interface";
 
 
 export interface IPost extends IBaseModel {
-    author: Types.ObjectId | IUser;
+    author: IUser | Types.ObjectId | string;
     title: string;
     content: string;
     privacy: string;
-    likes: number;
-    category: Types.ObjectId;
+    // category: Types.ObjectId;
 
 
 }

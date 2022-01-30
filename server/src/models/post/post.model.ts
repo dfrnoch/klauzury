@@ -1,4 +1,4 @@
-import mongoose, { Schema, SchemaTypes } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import { Models } from "../models.enums";
 import { IPost } from "./post.interface";
 import { setPostVirtuals } from "./post.virtuals";
@@ -7,7 +7,8 @@ import { setPostVirtuals } from "./post.virtuals";
 
 let postSchema = new Schema<IPost>({
     author: {
-        type: SchemaTypes.ObjectId,
+        type: Schema.Types.ObjectId,
+        required: true,
         ref: Models.USER
     },
     title: {
@@ -19,13 +20,12 @@ let postSchema = new Schema<IPost>({
         type: String,
         trim: true,
     },
-    likes: {
-        type: Number,
-        default: 0,
-    },
-    category: {
-        type: SchemaTypes.ObjectId,
-        ref: Models.CATEGORY
+    privacy: {
+        type: String,
+        enum: [
+            'PUBLIC',
+            'JUST_FOLLOWERS'
+        ]
     }
 
 }, {

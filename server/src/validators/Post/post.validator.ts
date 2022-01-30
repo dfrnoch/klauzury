@@ -7,8 +7,8 @@ const post = checkSchema({
         notEmpty: isNotEmpty('title'),
         isString: true,
         isLength: {
-            errorMessage: 'Title must be between 2 and 64 characters',
-            options: { min: 2, max: 64 }
+            errorMessage: 'Title must be between 10 and 128 characters',
+            options: { min: 10, max: 128 }
         }
     },
     content: {
@@ -24,3 +24,6 @@ const post = checkSchema({
         }
     },
 });
+
+
+export const postValidator = { post };

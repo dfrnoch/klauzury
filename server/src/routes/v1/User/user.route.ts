@@ -9,7 +9,7 @@ const user = new UserController();
 router.use(checkJwt.check);
 
 router
-    .get('/:id', user.getOne)
+    .get('/:id', user.getUser)
     .get('/:id/')
 
 
