@@ -5,7 +5,9 @@ enum UserRoles {
 
 
 enum UserVirtuals {
-    PROFILE = 'profile'
+    PROFILE = 'profile',
+    POST = 'post',
+    COMMENT = 'comment'
 }
 
-export { UserRoles, UserVirtuals };
+export { UserRoles, UserVirtuals }; 
