@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import { postValidator } from '../../validators/Post/post.validator';
-import { checkValidator } from '../../middlewares/checkValidator.middleware';
+import { postValidator } from '../../../validators/Post/post.validator';
+import { checkValidator } from '../../../middlewares/checkValidator.middleware';
 
-import { PostController } from '../../controllers/Post/post.controller';
-import { checkJwt } from '../../middlewares/checkJwt.middleware';
+import { PostController } from '../../../controllers/Post/post.controller';
+import { checkJwt } from '../../../middlewares/checkJwt.middleware';
 
 const router = Router();
 const post = new PostController();
