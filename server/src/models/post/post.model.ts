@@ -18,7 +18,8 @@ let postSchema = new Schema<IPost>({
     },
     content: {
         type: String,
-        trim: true,
+        required: [true, 'content is required'],
+        maxlength: [4000, 'content must not contrain more than 5000 characters']
     },
     privacy: {
         type: String,
