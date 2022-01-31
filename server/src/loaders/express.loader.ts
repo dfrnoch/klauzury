@@ -5,7 +5,7 @@ import helmet from 'helmet';
 
 import AuthRoute from "../routes/v1/auth.route";
 import TestRoute from "../routes/v1/test.route";
-import PostRoute from "../routes/v1/post.route";
+import PostRoute from "../routes/v1/post/post.route";
 // import UserRoute from "../routes/v1/User/user.route";
 // import MeRoute from "../routes/v1/User/me.route";
 
