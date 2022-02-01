@@ -8,5 +8,4 @@ export interface IComment extends IBaseModel {
     author: IUser | Types.ObjectId | string;
     post: Types.ObjectId;
     content: string;
-    likes: IUser[] | Types.ObjectId[];
 }

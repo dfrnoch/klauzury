@@ -1,34 +1,25 @@
 import { Router } from 'express';
 
-import { postValidator } from '../../../validators/Post/post.validator';
-import { checkValidator } from '../../../middlewares/checkValidator.middleware';
-
-import { PostController } from '../../../controllers/Post/post.controller';
+import { LikesController } from '../../../controllers/post/likes/likes.controller';
 import { checkJwt } from '../../../middlewares/checkJwt.middleware';
 
 const router = Router();
-const post = new PostController();
+const likes = new LikesController();
 
 router
     .use(checkJwt.check);
 
 
-router.get('/:id', post.getPost)
-
-    .get('/:id/comments'
+router
+    .get('/:id',
+        likes.getLikes
     )
 
-    .post('/:id/comment', 
-    postValidator.coment, checkValidator,
-    post.commentPost)
-    
-    .post('/:id/like', post.likePost)
+    .post('/post', 
+        likes.likePost
+        )
     
 
-    .post('/create',
-    postValidator.post, checkValidator,
-    post.createPost
-    );
 
 
 export default router; 

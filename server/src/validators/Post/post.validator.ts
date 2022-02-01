@@ -25,5 +25,16 @@ const post = checkSchema({
     },
 });
 
+const comment = checkSchema({
+    content: {
+        notEmpty: isNotEmpty('content'),
+        isString: true,
+        isLength: {
+            errorMessage: 'Title must be between 10 and 1000 characters',
+            options: { min: 10, max: 1000 } // maybe change 
+        }
+    }
+});
 
-export const postValidator = { post };
+
+export const postValidator = { post, comment };

@@ -15,14 +15,7 @@ router
 
 router.get('/:id', post.getPost)
 
-    .get('/:id/comments'
-    )
-
-    .post('/:id/comment', 
-    postValidator.coment, checkValidator,
-    post.commentPost)
-    
-    .post('/:id/like', post.likePost)
+    .get('/getPosts', post.getAllPosts)
     
 
     .post('/create',
