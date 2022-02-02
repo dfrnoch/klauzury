@@ -14,9 +14,10 @@ router
 
 router
     .get("/")
+    .get("/settings", me.getSettings);
     .patch("/profile",
-    meValidator.profile, checkValidator,
-    me.updateProfile)
+        meValidator.profile, checkValidator,
+        me.updateProfile)
 
 
 export default router; 

@@ -17,9 +17,15 @@ const userProfileSchema = new Schema({
         type: SchemaTypes.String,
         default: '#000000'
     },
-    gender: {
+    website: {
         type: String,
-        default: 'UNKNOWN',
+    },
+    location: {
+        type: String,
+    },
+    avatar: {
+        type: String,
+        default: 'default.png'
     }
 }, {
     timestamps: true

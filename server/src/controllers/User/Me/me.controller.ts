@@ -1,26 +1,33 @@
 import { NextFunction, Request, Response } from 'express';
-import { IUser } from 'src/models/user/user.interface';
+// import { IUser } from 'src/models/user/user.interface';
 import HttpException from '../../../exceptions/HttpException';
+import { UserProfile } from '../../../models/user/profile/profile.model';
 import { User } from '../../../models/user/user.model';
+import { response } from '../../../utils/response';
 
-export class MeController{
-    private model;
+export class MeController {
 
-    constructor(){
-        this.model = User;
-    }
+    public async updateProfile(req: Request, res: Response, next: NextFunction) {
+        const { bio, color, website, location } = req.body;
 
-    public async updateProfile(req: Request, res: Response, next: NextFunction){
-        const user = req.body.user as IUser;
-
-        const u = await this.model.findByIdAndUpdate(user._id, {
-            username: user.username,
-            email: user.email
+        const profile = await UserProfile.findOneAndUpdate({ user: req.body.user._id }, {
+            bio,
+            color,
+            website,
+            location
         }, { new: true });
 
-        if (!u) return next(new HttpException(400, 'Unexpected error'));
+        if (!profile) return next(new HttpException(404, 'User not found'));
 
-        return res.status(200).json(user);
+        return response({ data: profile, res, next, statusCode: 200 });
     }
-    
+
+    public async getSettings(req: Request, res: Response, next: NextFunction) {
+
+        const user = await User.findById(req.body.user._id).select('+email');
+        if (!user) return next(new HttpException(404, 'User not found'));
+
+        return response({ data: user, res, next, statusCode: 200 });
+
+    }
 }
