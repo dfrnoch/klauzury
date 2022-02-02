@@ -10,7 +10,6 @@ router.use(checkJwt.check);
 
 router
     .get('/:id', user.getUser)
-    .get('/:id/')
 
 
 

@@ -9,6 +9,6 @@ export interface IPost extends IBaseModel {
     content: string;
     privacy: string;
     // category: Types.ObjectId;
-
+    
 
 }

@@ -6,7 +6,7 @@ import HttpException from '../exceptions/HttpException';
  * A custom error handler that logs errors to the console.
  * 
  * @param {HttpException} err
- * The error that occurred.
+ * The error that occurred. 
  * 
  */
 

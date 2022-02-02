@@ -12,7 +12,7 @@ let userSchema = new Schema<IUser>({
         type: String,
         trim: true,
         unique: true,
-    },
+    }, 
     email: {
         type: String,
         select: false,

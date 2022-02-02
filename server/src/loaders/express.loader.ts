@@ -9,8 +9,8 @@ import PostRoute from "../routes/v1/post/post.route";
 import CommentsRoute from "../routes/v1/post/comment.route";
 import LikesRoute from "../routes/v1/post/like.route";
 
-// import UserRoute from "../routes/v1/User/user.route";
-// import MeRoute from "../routes/v1/User/me.route";
+import UserRoute from "../routes/v1/User/user.route";
+import MeRoute from "../routes/v1/User/me.route";
 
 
 
@@ -33,8 +33,8 @@ export default class ExpressLoader {
         app.use('/api/v1/likes', LikesRoute);
         app.use('/api/v1/comments', CommentsRoute);
 
-        // app.use('/api/v1/user' UserRoute);
-        // app.use('/api/v1/user/me' MeRoute)
+        app.use('/api/v1/user', UserRoute);
+        app.use('/api/v1/user/me', MeRoute)
 
         app.use(errorHandler.error)
 
