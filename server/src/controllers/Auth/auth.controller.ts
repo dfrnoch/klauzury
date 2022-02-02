@@ -4,20 +4,14 @@ import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import HttpException from '../../exceptions/HttpException';
 import { IUser } from '../../models/user/user.interface';
-import { AuthService } from './auth.service';
+import { UserProfile } from '../../models/user/profile/profile.model';
+import { User } from '../../models/user/user.model';
+import { response } from '../../utils/response';
 
 
 
 
 export class AuthController {
-    private authService: AuthService;
-
-    constructor() {
-        this.authService = new AuthService();
-        this.login = this.login.bind(this);
-        this.register = this.register.bind(this);
-        this.updatePassword = this.updatePassword.bind(this);
-    }
 
 
     async login(req: Request, res: Response, next: NextFunction) {
@@ -30,13 +24,13 @@ export class AuthController {
         if (email) conditions.email = email;
         else conditions.username = username;
 
-        const user = await this.authService.get(conditions);
+        const user = await User.findOne(conditions);
 
         if (!user || !(await user.comparePasswords(password, user.password)))
             return next(new HttpException(400, 'Incorrect credentials'));
 
 
-        return this.createJwt(user, res);
+        return this.createJwt(user, res, next);
     }
 
 
@@ -45,13 +39,15 @@ export class AuthController {
 
         if (!username && !email) return next(new HttpException(400, 'Username or email must be specified'));
 
-        const checkEmail = await this.authService.get({ "email": email });
-        const checkUsername = await this.authService.get({ "username": username });
+        const checkEmail = await User.findOne({ email });
+        const checkUsername = await User.findOne({ username });
         if (checkEmail || checkUsername) return next(new HttpException(400, 'User with this email or username already exists'));
 
 
-        const user = await this.authService.create(req.body);
-        return this.createJwt(user, res);
+        const user = await User.create(req.body);
+        await UserProfile.create({ user: user._id });
+
+        return this.createJwt(user, res, next);
     }
 
 
@@ -67,23 +63,20 @@ export class AuthController {
 
         const hashedPassword = await user.hashPassword(newpassword);
 
-        await this.authService.update(user._id, { password: hashedPassword, iat: new Date() });
+        await User.findByIdAndUpdate(user._id, { password: hashedPassword }, { new: true });
 
-        return this.createJwt(user, res);
+        return this.createJwt(user, res, next);
     }
 
 
 
 
-    private createJwt(user: IUser, res: Response) {
+    private createJwt(user: IUser, res: Response, next: NextFunction) {
         const token = jwt.sign({
             id: user._id,
         }, process.env.JWT_SECRET as string, { expiresIn: '365d' });
 
-        return res.status(200).json({
-            success: true,
-            token
-        });
+        return response({ data: { token }, res, next, statusCode: 200 });
     }
 
 }
