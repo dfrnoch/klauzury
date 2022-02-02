@@ -8,7 +8,7 @@ class Loader {
   public static async load(app: Application) {
     await MongooseLoader.load();
     await ExpressLoader.load(app);
-    }
+  }
 }
 
 
