@@ -14,7 +14,7 @@ router
 
 router
     .get("/")
-    .get("/settings", me.getSettings);
+    .get("/settings", me.getSettings)
     .patch("/profile",
         meValidator.profile, checkValidator,
         me.updateProfile)
