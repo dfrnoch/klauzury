@@ -1,6 +1,4 @@
 
-import * as bcrypt from 'bcrypt';
-
 import { IUser } from './user.interface';
 import { Models } from '../models.enums';
 import mongoose, { Schema } from 'mongoose';
