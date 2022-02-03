@@ -10,5 +10,6 @@ export interface IUserProfile extends IBaseModel {
     website: string;
     location: string;
     avatar: string;
+    interests: string[];
 
 }

@@ -3,7 +3,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
-import AuthRoute from "../routes/v1/auth.route";
+import DiscordRoute from "../routes/v1/oauth/discord.route";
+import GithubRoute from "../routes/v1/oauth/github.route";
 import TestRoute from "../routes/v1/test.route";
 import PostRoute from "../routes/v1/post/post.route";
 import CommentsRoute from "../routes/v1/post/comment.route";
@@ -25,7 +26,9 @@ export default class ExpressLoader {
         app.use(bodyParser.urlencoded({ extended: true }))
         app.use(bodyParser.json())
 
-        app.use('/api/v1/auth', AuthRoute);
+        app.use('/api/v1/oauth/discord', DiscordRoute);
+        app.use('/api/v1/oauth/github', GithubRoute);
+
         app.use('/api/v1/test', TestRoute);
 
         

@@ -6,16 +6,12 @@ import { IBaseModel } from "../base.interface";
 
 export interface IUser extends IBaseModel {
     username: string;
-	email: string;
-	password: string;
-    iat: Date;
+	oauthId: string;
+	provider: string;
+    iat: Date; //change
 
     profile?: IUserProfile | Types.ObjectId | string;
     posts?: Types.ObjectId[];
 
-
-
-    comparePasswords(decodedPassword: string, hashedPassword: string): Promise<boolean>
     checkIat(JWTiat: number): boolean
-    hashPassword(password: string): Promise<string>
 }

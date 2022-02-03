@@ -26,6 +26,10 @@ const userProfileSchema = new Schema({
     avatar: {
         type: String,
         default: 'default.png'
+    },
+    interests: {
+        type: [String],
+        default: []
     }
 }, {
     timestamps: true

@@ -13,15 +13,14 @@ let userSchema = new Schema<IUser>({
         trim: true,
         unique: true,
     }, 
-    email: {
+    oauthId: {
         type: String,
-        select: false,
-        trim: true,
         unique: true,
+        sparse: true,
     },
-    password: {
+    provider: {
         type: String,
-        select: false
+        enum: ['github', 'discord'],
     },
     iat: {
         type: Date,
@@ -35,17 +34,6 @@ let userSchema = new Schema<IUser>({
 
 
 
-userSchema.pre<IUser>("save", function (next) 
-{ 
-     if(this.isModified('password')) {
-        this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
-        next();
-     }
-     next();
-});
-
-
-
 // methods
 userSchema.methods.checkIat = function(JWTiat: number) {
     if (this.iat) {
@@ -55,9 +43,6 @@ userSchema.methods.checkIat = function(JWTiat: number) {
 
     return false;
 };
-userSchema.methods.comparePasswords = (decodedPassword: string, hashedPassword: string) => bcrypt.compare(decodedPassword, hashedPassword);
-userSchema.methods.hashPassword = (password: string): Promise<string> => bcrypt.hash(password, 10);
-
 
 setUserVirtuals(userSchema);
 
