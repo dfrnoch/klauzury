@@ -4,27 +4,27 @@ import OauthController from "../../../controllers/oauth/oauth.controller";
 
 
 class DiscordRouter {
-    private _router: IRouter;
+    private router: IRouter;
     private controller: OauthController;
 
     constructor() {
-        this._router = Router();
+        this.router = Router();
         this.controller = new OauthController();
 
         this.initRoutes();
     }
 
     public getRouter(): IRouter {
-        return this._router;
+        return this.router;
     }
 
     private initRoutes() {
-        this._router.get(
+        this.router.get(
             "/",
             passport.authenticate("discord", { scope: ["identify"] })
         );
 
-        this._router.get(
+        this.router.get(
             "/callback",
             passport.authenticate("discord", { failureRedirect: "/failed" }),
             this.controller.Redirect

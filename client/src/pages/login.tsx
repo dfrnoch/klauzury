@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { FormItem } from "../../ui/Form/FormItem";
+import { FormItem } from "../modules/auth/FormItem";
 
 type Inputs = {
   username: string;
