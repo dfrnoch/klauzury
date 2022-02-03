@@ -8,7 +8,7 @@ export interface IUser extends IBaseModel {
     username: string;
 	oauthId: string;
 	provider: string;
-    iat: Date; //change
+    avatar?: string;
 
     profile?: IUserProfile | Types.ObjectId | string;
     posts?: Types.ObjectId[];

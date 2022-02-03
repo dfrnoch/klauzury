@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
+import passport from 'passport';
 
 import DiscordRoute from "../routes/v1/oauth/discord.route";
 import GithubRoute from "../routes/v1/oauth/github.route";
@@ -14,6 +15,9 @@ import UserRoute from "../routes/v1/User/user.route";
 import MeRoute from "../routes/v1/User/me.route";
 
 
+import "../middlewares/strategies/discord.strategy";
+import "../middlewares/strategies/github.strategy";
+
 
 import errorHandler from '../middlewares/errorHandler.middleware';
 
@@ -25,6 +29,8 @@ export default class ExpressLoader {
         app.use(helmet());
         app.use(bodyParser.urlencoded({ extended: true }))
         app.use(bodyParser.json())
+
+        app.use(passport.initialize());
 
         app.use('/api/v1/oauth/discord', DiscordRoute);
         app.use('/api/v1/oauth/github', GithubRoute);

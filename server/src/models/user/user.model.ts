@@ -9,7 +9,6 @@ let userSchema = new Schema<IUser>({
     username: {
         type: String,
         trim: true,
-        unique: true,
     }, 
     oauthId: {
         type: String,
@@ -20,9 +19,9 @@ let userSchema = new Schema<IUser>({
         type: String,
         enum: ['github', 'discord'],
     },
-    iat: {
-        type: Date,
-    },
+    avatar: {
+        type: String,
+    }
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
@@ -33,14 +32,14 @@ let userSchema = new Schema<IUser>({
 
 
 // methods
-userSchema.methods.checkIat = function(JWTiat: number) {
-    if (this.iat) {
-        const changedTimestamp = parseInt((this.iat.getTime() / 1000).toString(), 10);
-        return JWTiat < changedTimestamp;
-    }
+// userSchema.methods.checkIat = function(JWTiat: number) {
+//     if (this.iat) {
+//         const changedTimestamp = parseInt((this.iat.getTime() / 1000).toString(), 10);
+//         return JWTiat < changedTimestamp;
+//     }
 
-    return false;
-};
+//     return false;
+// };
 
 setUserVirtuals(userSchema);
 
