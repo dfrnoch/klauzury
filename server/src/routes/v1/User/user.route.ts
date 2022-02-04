@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { checkJwt } from '../../../middlewares/checkJwt.middleware';
+import { authCheck } from '../../../middlewares/auth.middleware';
 import { UserController } from '../../../controllers/User/user.controller';
 
 
 const router = Router();
 const user = new UserController();
 
-router.use(checkJwt.check);
+router.use(authCheck.check);
 
 router
     .get('/:id', user.getUser)

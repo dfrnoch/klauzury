@@ -4,13 +4,13 @@ import { postValidator } from '../../../validators/Post/post.validator';
 import { checkValidator } from '../../../middlewares/checkValidator.middleware';
 
 import { CommentController } from '../../../controllers/Post/comments/comment.controller';
-import { checkJwt } from '../../../middlewares/checkJwt.middleware';
+import { authCheck } from '../../../middlewares/auth.middleware';
 
 const router = Router();
 const post = new CommentController();
 
 router
-    .use(checkJwt.check);
+    .use(authCheck.check);
 
 
 router.get('/:id', post.getComments)

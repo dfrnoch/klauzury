@@ -1,11 +1,11 @@
 import { Request, Router, Response } from 'express';
-import { checkJwt } from "../../middlewares/checkJwt.middleware"
+import { authCheck } from "../../middlewares/auth.middleware"
 
 
 const router = Router();
 
 
-router.post('/jwt', [checkJwt.check], async (req: Request, res: Response) => {
+router.post('/jwt', [authCheck.check], async (req: Request, res: Response) => {
     const user = req.body.user
 
     res.json({ user });

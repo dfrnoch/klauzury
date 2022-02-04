@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
 import { LikesController } from '../../../controllers/post/likes/likes.controller';
-import { checkJwt } from '../../../middlewares/checkJwt.middleware';
+import { authCheck } from '../../../middlewares/auth.middleware';
 
 const router = Router();
 const likes = new LikesController();
 
 router
-    .use(checkJwt.check);
+    .use(authCheck.check);
 
 
 router

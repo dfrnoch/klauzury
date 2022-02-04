@@ -3,6 +3,7 @@ import { Profile, Strategy, StrategyOptions } from "passport-discord";
 import {User} from "../../models/user/user.model";
 import config from "../../config";
 import { UserProfile } from "../../models/user/profile/profile.model";
+import { IUser } from "../../models/user/user.interface";
 
 
 class DiscordStrategySetup {
@@ -11,13 +12,16 @@ class DiscordStrategySetup {
         clientSecret: config.DISCORD_CLIENT_SECRET,
         callbackURL: config.DISCORD_CALLBACK,
     };
+
     public static async Setup(): Promise<void> {
-        passport.serializeUser((user, done) => {
-            done(null, user);
+        passport.serializeUser((user: any, done) => {
+            done(null, user.oauthId);
         });
 
-        passport.deserializeUser((user: any, done) => {
-            done(user);
+        passport.deserializeUser((id, done) => {
+            User.findById(id, (err: Error, user: IUser) => {
+                done(err, user);
+            });
         });
 
         passport.use(
@@ -36,7 +40,7 @@ class DiscordStrategySetup {
                         avatar: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=256`
                     };
 
-                    await console.log(user);
+                    await console.log(_accessToken);
 
                     const logged = await User.findOne({
                         oauthId: user.oauthId,
@@ -44,6 +48,7 @@ class DiscordStrategySetup {
                     if (logged) {
                         return done(null, user);
                     }
+
                     const urs = await User.create(user);
 
                     await UserProfile.create({

@@ -4,13 +4,13 @@ import { postValidator } from '../../../validators/Post/post.validator';
 import { checkValidator } from '../../../middlewares/checkValidator.middleware';
 
 import { PostController } from '../../../controllers/Post/post.controller';
-import { checkJwt } from '../../../middlewares/checkJwt.middleware';
+import { authCheck } from '../../../middlewares/auth.middleware';
 
 const router = Router();
 const post = new PostController();
 
 router
-    .use(checkJwt.check);
+    .use(authCheck.check);
 
 
 router.get('/:id', post.getPost)

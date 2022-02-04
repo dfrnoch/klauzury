@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { checkJwt } from "../../../middlewares/checkJwt.middleware"
+import { authCheck } from "../../../middlewares/auth.middleware"
 import { MeController } from "../../../controllers/User/Me/me.controller";
 
 import { meValidator } from '../../../validators/User/me.validator';
@@ -10,7 +10,7 @@ const router = Router();
 const me = new MeController();
 
 router
-    .use(checkJwt.check);
+    .use(authCheck.check);
 
 router
     .get("/")
