@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { postValidator } from '../../../validators/Post/post.validator';
 import { checkValidator } from '../../../middlewares/checkValidator.middleware';
 
-import { CommentController } from '../../../controllers/Post/comments/comment.controller';
+import { CommentController } from '../../../controllers/post/comments/comment.controller';
 import { authCheck } from '../../../middlewares/auth.middleware';
 
 const router = Router();

@@ -3,7 +3,7 @@ import { Profile, Strategy, StrategyOptions } from "passport-github2";
 import {User} from "../../models/user/user.model";
 import config from "../../config";
 import { UserProfile } from "../../models/user/profile/profile.model";
-import { IUser } from "../../models/user/user.interface";
+// import { IUser } from "../../models/user/user.interface";
 
 class GithubStrategySetup {
     private static GithubOptions: StrategyOptions = {
@@ -17,10 +17,17 @@ class GithubStrategySetup {
         });
 
         passport.deserializeUser((id, done) => {
-            User.findById(id, (err: Error, user: IUser) => {
-                done(err, user);
+
+            const user = User.findOne({
+                oauthId: id,
             });
+
+            if(user){
+                done(null, user);
+            }
+
         });
+
         passport.use(
             new Strategy(
                 this.GithubOptions,

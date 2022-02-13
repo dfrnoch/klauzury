@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { authCheck } from "../../../middlewares/auth.middleware"
-import { MeController } from "../../../controllers/User/Me/me.controller";
+import { MeController } from "../../../controllers/user/Me/me.controller";
 
 import { meValidator } from '../../../validators/User/me.validator';
 import { checkValidator } from '../../../middlewares/checkValidator.middleware';

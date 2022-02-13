@@ -1,14 +1,17 @@
 import { Request, Router, Response } from 'express';
-import { authCheck } from "../../middlewares/auth.middleware"
+// import { authCheck } from "../../middlewares/auth.middleware"
 
 
 const router = Router();
 
 
-router.post('/jwt', [authCheck.check], async (req: Request, res: Response) => {
-    const user = req.body.user
+router.get('/jwt', async (req: Request, res: Response) => {
+    console.log(req.user)
 
-    res.json({ user });
+
+
+
+    res.json({ a: "bobux" });
 })
 
 
