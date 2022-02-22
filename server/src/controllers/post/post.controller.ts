@@ -5,7 +5,7 @@ import { Likes } from '../../models/post/likes/likes.model';
 import { response } from '../../utils/response';
 
 export class PostController{
-    
+
     public async getPost(req: Request, res: Response, next: NextFunction){
         const { id } = req.params;
         const post = await Post.findById(id);
@@ -40,5 +40,5 @@ export class PostController{
 
         return response({ data: [post, likes], res, next, statusCode: 201 });
     }
-    
+
 }
