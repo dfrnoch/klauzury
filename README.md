@@ -13,4 +13,5 @@ Nic není hotové
 
 ## API Dokumentace
 
+
 https://www.postman.com/lynxcz/workspace/klauzury/collection/11410105-9cb7c932-1f57-4455-b8c7-ecded6f7bdde
