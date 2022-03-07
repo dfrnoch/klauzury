@@ -8,7 +8,6 @@
         "client": "cd ./client && yarn dev",
         "publishAll": "lerna version && git push"
     },
-
     "devDependencies": {
         "lerna": "^4.0.0"
     }
