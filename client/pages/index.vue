@@ -15,12 +15,12 @@ import '@/assets/css/mainPage.css'
         </div>
     </div>
     <div class="auth">
-        <a href="" class="auth-box auth-github">
+        <a href="http://localhost:4000/api/v1/oauth/github/callback" class="auth-box auth-github">
             <span class="">
                 Login through Github
             </span>
         </a>
-        <a href="" class="auth-box auth-discord">
+        <a href="http://localhost:4000/api/v1/oauth/discord/callback" class="auth-box auth-discord">
             <span href="{{ route('login') }}" class="">
                 Login through Discord
             </span>
