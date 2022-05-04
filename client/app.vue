@@ -1,9 +1,9 @@
 <script setup>
-import '@/assets/css/tailwind.css'
+import '@/assets/css/base.css'
 </script>
 
 <template>
-    <NuxtLayout>
-      <NuxtPage/>
-    </NuxtLayout>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

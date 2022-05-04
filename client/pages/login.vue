@@ -3,5 +3,7 @@
 </script>
 
 <template>
-    tepejt
+    <a href="{{ route('login') }}" class="">
+        Login
+    </a>
 </template>

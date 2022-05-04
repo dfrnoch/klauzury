@@ -1,0 +1,33 @@
+
+.header{
+    font-family: 'Poppins', sans-serif;
+}
+
+h1{
+    font-size: 6.5rem;
+    font-weight: 900;
+    margin:0;
+}
+
+.auth{
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    width: 16rem;
+}
+
+
+.auth-box{
+    padding: 1.5rem;
+    margin: 1rem 0;
+    background: #fff;
+    border-radius: .3rem;
+}
+
+.auth-github{
+    background: rgb(190, 190, 190);
+}
+
+.auth-discord{
+    background: rgb(93, 95, 240);
+}
