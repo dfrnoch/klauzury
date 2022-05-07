@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import passport from 'passport';
-import cookieSession from 'cookie-session';
+import session from 'express-session';
 
 import DiscordRoute from "../routes/v1/oauth/discord.route";
 import GithubRoute from "../routes/v1/oauth/github.route";
@@ -30,10 +30,11 @@ export default class ExpressLoader {
         app.use(helmet());
         app.use(bodyParser.urlencoded({ extended: true }))
         app.use(bodyParser.json())
-        app.use(cookieSession({
-            name: 'session',
-            keys: ['ss', 'sasa']
-        }))
+        app.use(session({
+          secret: 'keyboard cat',
+          resave: false,
+          saveUninitialized: true
+        }));
 
         app.use(passport.initialize());
         app.use(passport.session());

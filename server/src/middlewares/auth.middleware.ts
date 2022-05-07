@@ -15,7 +15,7 @@ declare module 'express-serve-static-core' {
 
 export class authCheck {
     public static async check(req: Request, _res: Response, next: NextFunction) {
-        if(req.user){
+        if(req.isAuthenticated()){
             next();
         } else {
             return next(new HttpException(401, "Unauthorized"))

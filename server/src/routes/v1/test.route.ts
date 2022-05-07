@@ -8,7 +8,12 @@ const router = Router();
 
 router.use(authCheck.check);
 router.get('/jwt', async (req: Request, res: Response) => {
-    console.log(req.user.avatar);
+    //login user
+    const user = req.user;
+    console.log(user);
+
+
+
 
 
     res.json({ a: "a" });
