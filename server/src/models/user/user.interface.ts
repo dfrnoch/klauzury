@@ -15,3 +15,4 @@ export interface IUser extends IBaseModel {
 
     checkIat(JWTiat: number): boolean
 }
+

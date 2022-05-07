@@ -13,7 +13,7 @@ router
     .use(authCheck.check);
 
 router
-    .get("/")
+    .get("/",)
     .get("/settings", me.getSettings)
     .patch("/profile",
         meValidator.profile, checkValidator,

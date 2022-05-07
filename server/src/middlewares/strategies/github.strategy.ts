@@ -3,7 +3,7 @@ import { Profile, Strategy, StrategyOptions } from "passport-github2";
 import {User} from "../../models/user/user.model";
 import config from "../../config";
 import { UserProfile } from "../../models/user/profile/profile.model";
-// import { IUser } from "../../models/user/user.interface";
+
 
 class GithubStrategySetup {
     private static GithubOptions: StrategyOptions = {
@@ -21,6 +21,8 @@ class GithubStrategySetup {
             const user = User.findOne({
                 oauthId: id,
             });
+            console.log(user);
+
 
             if(user){
                 done(null, user);

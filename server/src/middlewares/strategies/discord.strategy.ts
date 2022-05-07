@@ -3,7 +3,6 @@ import { Profile, Strategy, StrategyOptions } from "passport-discord";
 import {User} from "../../models/user/user.model";
 import config from "../../config";
 import { UserProfile } from "../../models/user/profile/profile.model";
-// import { IUser } from "../../models/user/user.interface";
 
 
 class DiscordStrategySetup {
